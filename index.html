@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102947">
+<meta name="description" content="The Lamp v1.3: a calm adaptive study companion for Primary 3 and beyond.">
+<title>The Lamp · v1.3</title>
+<style>
+:root{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#16304b;background:#f4f8fc;font-size:16px}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #faad37;outline-offset:2px}
+.top{background:#102947;color:#fff}.top-inner{max-width:1100px;margin:auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-size:1.35rem;font-weight:800;display:flex;gap:10px;align-items:center}.mark{width:38px;height:38px;border-radius:12px;background:#f9bd52;color:#102947;display:grid;place-items:center}
+.top-note{font-size:.9rem;color:#c9daed}.shell{max-width:1100px;margin:auto;padding:0 20px 70px}
+.nav{display:flex;gap:5px;border-bottom:1px solid #d6e2ee;margin:20px 0 26px;overflow:auto}
+.nav button{border:0;background:transparent;padding:12px 16px;color:#465f78;font-weight:700;border-bottom:3px solid transparent;white-space:nowrap}
+.nav button.active{color:#0f4d7a;border-bottom-color:#e49b2d}.intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:800;color:#55758e;margin:0 0 6px}
+h1{font-size:clamp(1.65rem,4vw,2.35rem);line-height:1.15;margin:0 0 6px;color:#102947}h2{font-size:1.25rem;margin:0 0 12px}h3{font-size:1.05rem;margin:0 0 8px}
+p{line-height:1.55}.muted{color:#5e7184}.year{border:1px solid #bdcfdf;background:#fff;border-radius:10px;padding:9px 12px;font-weight:700;color:#173653}
+.grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px}.card{background:#fff;border:1px solid #dae5ee;border-radius:19px;padding:22px;box-shadow:0 8px 24px #183c5e0a}
+.span2{grid-column:1/-1}.mission{background:linear-gradient(135deg,#153b61,#102947);color:#fff}.mission h2{color:#fff;font-size:1.5rem}.mission p{color:#d8e7f4}
+.pill{display:inline-block;padding:5px 10px;border-radius:30px;background:#ffffff1d;color:#fff;font-size:.82rem;font-weight:700}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.btn{border:0;background:#f7b94d;color:#142b42;padding:11px 16px;border-radius:10px;font-weight:800;min-height:44px}
+.btn.secondary{background:#e9f1f8;color:#123d62}.btn.outline{background:#fff;color:#14476c;border:1px solid #a8c1d6}.btn.danger{background:#fff2ef;color:#9b3829}
+.subject-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.subject{border:1px solid #dae5ee;border-radius:15px;padding:16px;background:#fff}.subject strong{display:block}.subject small{color:#60788d}
+.dates{display:grid;gap:10px}.date{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #e6edf3}.date:last-child{border:0}.date-tag{min-width:64px;background:#eaf3fa;text-align:center;border-radius:10px;padding:7px 4px;font-weight:800;color:#24577b}
+.date small{display:block;color:#647b8f}.date.past{opacity:.55}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 12px}
+.select-row{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.select-row select,.field{border:1px solid #bdcfdf;border-radius:10px;padding:10px 12px;background:#fff;min-height:44px;color:#18354f}
+.field{width:100%;max-width:370px}.prompt-box{border:1px solid #d5e3ed;background:#f6fafe;border-radius:13px;padding:16px;margin:14px 0}
+.exercise{font-size:1.1rem;line-height:1.65;margin-top:10px}.options{display:grid;gap:10px}.option{border:1px solid #b6cddd;border-radius:12px;background:#fff;padding:12px 14px;text-align:left;color:#173851}
+.option:hover,.option.selected{border-color:#286b9a;background:#eaf4fa}.feedback{padding:15px;border-radius:12px;margin-top:15px;background:#eaf6eb;border:1px solid #bbdfbf}.feedback.review{background:#fff4e5;border-color:#f1cc95}
+.topic-list{display:grid;gap:8px}.topic{display:flex;justify-content:space-between;gap:14px;border:1px solid #e0e9f1;border-radius:12px;padding:11px 13px}.topic-title{font-weight:700}.topic-badge{color:#24577b;background:#eaf3fa;padding:7px 10px;border-radius:9px;font-size:.86rem;font-weight:800;white-space:nowrap;height:max-content}
+.tiny{font-size:.86rem;color:#60788d}.session{display:flex;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #e5edf3}.session:last-child{border:0}
+.empty{padding:22px;border:1px dashed #bdd1df;border-radius:14px;color:#597286;background:#f8fbfd}.hidden{display:none!important}.status{min-height:20px;color:#306141;font-weight:700}
+.language-help{border:1px solid #d5e3ed;border-radius:12px;padding:12px 14px;background:#f8fbfe;margin:14px 0}.language-help summary{font-weight:800;color:#24567d;cursor:pointer}
+.check{display:block;padding:12px;border:1px solid #d5e3ed;border-radius:10px;margin:8px 0;line-height:1.45;cursor:pointer}.check input{width:19px;height:19px;vertical-align:middle;margin-right:8px}
+.footer{margin:40px 0 0;color:#62788b;font-size:.87rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.subject-grid{grid-template-columns:repeat(2,1fr)}.shell{padding:0 16px 50px}.top-inner{padding:14px 16px}.top-note{display:none}.card{padding:18px}.intro{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-inner"><div class="brand"><span class="mark">✦</span>The Lamp</div><span class="top-note">A little light for the next step · v1.3</span></div></header>
+<main class="shell">
+<nav class="nav" aria-label="Main navigation">
+<button data-tab="home" class="active">Today</button><button data-tab="practice">Practise</button><button data-tab="topics">My topics</button><button data-tab="journey">My journey</button>
+</nav>
+
+<section class="intro">
+<div><p class="eyebrow" id="dateLine"></p><h1 id="pageTitle">One bright step at a time</h1><div class="muted" id="pageSub">Choose a short task, then give yourself a break.</div></div>
+<select id="yearSelect" class="year" aria-label="School year"><option value="P3">Primary 3</option><option value="P4">Primary 4</option><option value="P5">Primary 5</option><option value="P6">Primary 6</option></select>
+</section>
+
+<div id="home" class="panel">
+<div class="grid">
+<section class="card mission"><span class="pill" id="missionLabel">Today's step</span><h2 id="missionTitle" style="margin-top:14px"></h2><p id="missionText"></p><div class="actions"><button class="btn" id="missionButton">Begin</button><button class="btn secondary" id="dailyButton">Today's five</button></div></section>
+<section class="card"><h2>Coming up</h2><div class="dates" id="dates"></div></section>
+<section class="span2"><div class="section-head"><h2>My subjects</h2><span class="tiny">Lamp practice status, not exam readiness</span></div><div class="subject-grid" id="subjects"></div></section>
+</div>
+</div>
+
+<div id="practice" class="panel hidden">
+<section class="card"><h2>Pick a small challenge</h2><p class="muted">Try it first. Then check, learn, and revisit what needs another look.</p>
+<div class="actions"><button class="btn secondary" id="dailyStart">Today's five</button></div>
+<div class="select-row" id="selectRow"><select id="subjectSelect" aria-label="Subject"></select><select id="typeSelect"><option value="quick">Quick questions</option><option value="writing">Writing studio</option></select></div>
+<div id="challenge"></div></section>
+</div>
+
+<div id="topics" class="panel hidden">
+<section class="card"><h2>My topic map</h2><p class="muted">Learning, Practising and Secure describe repeated practice inside The Lamp. They are not school mastery or exam-readiness grades.</p>
+<div class="select-row"><select id="topicSubject"></select></div><div class="topic-list" id="topicList"></div>
+<form id="topicForm" class="actions"><input class="field" id="newTopic" maxlength="80" placeholder="Add a topic from school" required><button class="btn secondary">Add topic</button></form>
+</section>
+</div>
+
+<div id="journey" class="panel hidden">
+<div class="grid">
+<section class="card"><h2>My practice</h2><p id="journeySummary"></p><div class="subject-grid" id="journeySubjects"></div></section>
+<section class="card"><h2>Recent steps</h2><div id="sessions"></div></section>
+<section class="card span2"><h2>Mistake memory</h2><p class="muted">A missed question stays here until it is answered correctly twice after the miss. Clearing a mistake is progress.</p><div id="mistakeMemory"></div></section>
+<section class="card span2"><h2>Keep The Lamp with you</h2><p class="muted">Progress stays on this device. Save a backup before changing devices or browsers.</p>
+<div class="actions"><button class="btn secondary" id="exportButton">Save my backup</button><label class="btn outline" for="importFile">Open a backup</label><input id="importFile" type="file" accept="application/json,.json" class="hidden"><button class="btn danger" id="resetButton">Start over</button></div>
+<p class="status" id="backupStatus"></p>
+<details><summary>For grown-ups</summary><p class="tiny">The adaptive Daily Five draws only from this finite reviewed question bank. It prioritises unresolved misses and under-practised items, then includes a confidence-builder where possible. “Secure” means secure in repeated Lamp practice, not exam readiness. No child account or name is required.</p></details>
+</section>
+</div>
+</div>
+<p class="footer">The Lamp · A calm place to practise, notice, and grow.</p>
+</main>
+
+<script>
+(()=>{'use strict';
+const KEY='the-lamp-v1';
+const subjects=['English','Chinese','Science','Mathematics'];
+const seed={
+English:['Writing','Language use','Comprehension','Listening comprehension'],
+Chinese:['写作 Writing','语文应用 Language use','阅读理解 Comprehension','听力 Listening'],
+Science:['Living and non-living things','Classifying living things','Materials','Animal life cycles','Plant life cycles','Properties of magnets','Making and using magnets'],
+Mathematics:['Numbers to 10 000','Addition and subtraction','Money','Multiplication tables 6–9','Multiplication and division','Four-operation word problems','Bar graphs','Angles','Perpendicular and parallel lines','Fractions','Length, mass and volume','Area and perimeter','Time','P1–P2 foundations']
+};
+const exams=[['2026-10-05','5 Oct','English Writing · 50 min'],['2026-10-06','6 Oct','Chinese Writing · 40 min'],['2026-10-22','22 Oct','Science · 1 h 30 min'],['2026-10-23','23 Oct','Chinese Paper 2 + Listening'],['2026-10-26','26 Oct','English Paper 2 + Listening'],['2026-10-27','27 Oct','Mathematics · 1 h 30 min']];
+
+const questions={
+English:[
+['Language use','Choose the sentence with the correct verb.',['Yesterday, Mei goes to the library.','Yesterday, Mei went to the library.','Yesterday, Mei going to the library.'],1,'“Yesterday” signals the past tense, so use “went”.'],
+['Comprehension','Asha held the umbrella over her friend although her own shoulder got wet. What does this show?',['Asha was kind.','Asha forgot her umbrella.','Asha disliked the rain.'],0,'Her action puts her friend’s comfort first.'],
+['Language use','The children ___ quietly when the teacher entered.',['was reading','were reading','is reading'],1,'“Children” is plural, so “were reading” agrees with the subject.'],
+['Language use','Choose the correct sentence.',['She has two pencil.','She has two pencils.','She have two pencils.'],1,'“Two” needs a plural noun, and “she” takes “has”.'],
+['Comprehension','Ravi checked the sky and hurried to bring the clothes indoors. What was he expecting?',['Rain','A visitor','A sunny afternoon'],0,'The actions are clues that Ravi expected rain.'],
+['Language use','Lina walked ___ so she would not wake the baby.',['quiet','quietly','quieter'],1,'“Quietly” describes how Lina walked.'],
+['Comprehension','The gate was locked, so Amir took the longer path. Why did he change his route?',['He wanted exercise.','He could not use the gate.','He had lost his bag.'],1,'The locked gate caused the change of route.'],
+['Language use','Choose the sentence with the correct punctuation.',['Where is my book.','Where is my book?','Where is my book!'],1,'A direct question ends with a question mark.']
+],
+Chinese:[
+['语文应用 Language use','选择最合适的词语：妹妹把玩具收进盒子里，房间变得很____。',['整齐','热闹','勇敢'],0,'“整齐”最适合收拾好玩具后的房间。','Xuǎnzé zuì héshì de cíyǔ. Mèimei bǎ wánjù shōu jìn hézi lǐ, fángjiān biàn de hěn ____.','Choose the most suitable word. The room became very ____ after the toys were put away.'],
+['阅读理解 Comprehension','小明看见同学跌倒，马上扶她起来。他是怎样的人？',['乐于助人','粗心大意','胆小怕事'],0,'他主动扶起同学，说明他乐于助人。','Xiǎomíng kànjiàn tóngxué diēdǎo, mǎshàng fú tā qǐlái. Tā shì zěnyàng de rén?','Xiaoming saw a classmate fall and immediately helped her up. What kind of person is he?'],
+['语文应用 Language use','选择正确的句子。',['我昨天去图书馆借书。','我昨天图书馆去借书。','昨天我借书去图书馆。'],0,'第一句的语序最通顺。','Xuǎnzé zhèngquè de jùzi.','Choose the sentence with correct Chinese word order.'],
+['语文应用 Language use','选择合适的量词：一____雨伞。',['把','只','条'],0,'说“一把雨伞”。','Xuǎnzé héshì de liàngcí: yì ____ yǔsǎn.','Choose the suitable measure word for one umbrella.'],
+['阅读理解 Comprehension','小丽把座位让给老人。老人说了声“谢谢”。小丽做了什么？',['帮助老人','寻找座位','送老人回家'],0,'她让出座位，帮助老人坐下。','Xiǎolì bǎ zuòwèi ràng gěi lǎorén. Xiǎolì zuò le shénme?','Xiaoli gave her seat to an elderly person. What did she do?'],
+['语文应用 Language use','“干净”的反义词是____。',['整齐','肮脏','明亮'],1,'“干净”和“肮脏”的意思相反。','“Gānjìng” de fǎnyìcí shì ____.','Choose the opposite of “clean”.'],
+['语文应用 Language use','做完功课后，我____收拾书包。',['马上','昨天','旁边'],0,'“马上”表示立刻做下一件事。','Zuò wán gōngkè hòu, wǒ ____ shōushi shūbāo.','After homework, I ____ pack my school bag.'],
+['阅读理解 Comprehension','妈妈提醒小华带雨伞，因为天空乌云密布。妈妈为什么提醒他？',['可能会下雨','太阳太猛烈','雨伞坏了'],0,'“乌云密布”是可能下雨的线索。','Tiānkōng wūyún mìbù. Māma wèishénme tíxǐng tā dài yǔsǎn?','The sky is full of dark clouds. Why did Mum remind him to take an umbrella?']
+],
+Science:[
+['Classifying living things','Which feature is most useful for grouping a butterfly and a beetle together?',['Both have six legs.','Both can fly.','Both are small.'],0,'Six legs is a shared body feature.'],
+['Animal life cycles','Which animal begins its life cycle as an egg?',['Cat','Chicken','Cow'],1,'A chicken hatches from an egg.'],
+['Properties of magnets','A paper clip is attracted to a magnet. What is the best conclusion?',['The clip is made of a magnetic material.','All metals are magnetic.','The clip is another magnet.'],0,'Attraction shows the clip contains a magnetic material.'],
+['Materials','Which material is usually chosen for a clear window?',['Glass','Wood','Cardboard'],0,'Glass lets light pass through.'],
+['Living and non-living things','Which is a living thing?',['Mushroom','Plastic ruler','Stone'],0,'A mushroom grows and reproduces.'],
+['Plant life cycles','What can grow into a new plant when conditions are suitable?',['A seed','A stone','A dry leaf'],0,'A seed can germinate and grow.'],
+['Properties of magnets','What happens when the north poles of two bar magnets face each other?',['They attract.','They repel.','They become non-magnetic.'],1,'Like magnetic poles repel.'],
+['Materials','Which material is best for a raincoat because it does not let water pass through easily?',['Paper','Plastic','Cotton cloth'],1,'Plastic is waterproof.']
+],
+Mathematics:[
+['Multiplication tables 6–9','What is 7 × 8?',['54','56','64'],1,'7 groups of 8 make 56.'],
+['Fractions','A cake is cut into 8 equal pieces. Three are eaten. What fraction is left?',['3/8','5/8','5/3'],1,'5 of the 8 equal pieces remain.'],
+['Area and perimeter','A rectangle is 6 cm long and 4 cm wide. What is its perimeter?',['10 cm','20 cm','24 cm'],1,'6 + 4 + 6 + 4 = 20 cm.'],
+['Time','A lesson begins at 2:15 pm and lasts 45 minutes. When does it end?',['2:45 pm','3:00 pm','3:15 pm'],1,'2:15 pm + 45 minutes = 3:00 pm.'],
+['Addition and subtraction','What is 3,406 − 1,278?',['2,128','2,228','2,138'],0,'3,406 − 1,278 = 2,128.'],
+['Money','A snack costs $2.35. You pay $5.00. How much change do you get?',['$2.65','$3.35','$2.75'],0,'$5.00 − $2.35 = $2.65.'],
+['Bar graphs','A bar graph shows 8 apples on Monday and 5 on Tuesday. How many more on Monday?',['3','5','13'],0,'8 − 5 = 3.'],
+['Angles','Which is smaller than a right angle?',['An acute angle','An obtuse angle','A straight angle'],0,'An acute angle is smaller than a right angle.']
+]
+};
+
+for(const s of subjects) questions[s]=questions[s].map((a,i)=>({topic:a[0],q:a[1],options:a[2],answer:a[3],why:a[4],pinyin:a[5],translation:a[6],id:`${s[0]}${String(i+1).padStart(2,'0')}`}));
+
+const guided={
+English:[
+{title:'The scattered crayons',scene:'During recess, a classmate drops a box of crayons in the corridor. Some roll under a bench.',beats:['Beginning: Where are you, and who is there?','Problem: What happened?','Action: What do you do or say?','Ending: How does your classmate react?'],check:['My story has a beginning, action and ending.','I showed one feeling through an action or words.','I checked tense and punctuation.']},
+{title:'The forgotten water bottle',scene:'Just before leaving school, you notice a friend has left a water bottle in the classroom.',beats:['Beginning: What are you doing?','Problem: Why might your friend need it?','Action: How do you return it?','Ending: What happens next?'],check:['Every event follows clearly from the last.','I included a specific action or line of dialogue.','I checked tense and punctuation.']}
+],
+Chinese:[
+{title:'散落的彩色笔',scene:'下课时，同学的彩色笔掉在走廊上，有几支滚到长椅下面。',beats:['开头：你在哪里？谁在场？','问题：彩色笔怎么了？','行动：你做了什么？说了什么？','结尾：同学有什么反应？'],check:['我写清楚开头、经过和结果。','我写出一个动作或一句对话。','我检查错别字、语序和标点。']},
+{title:'忘记带走的水壶',scene:'放学前，你发现朋友把水壶忘在教室里。',beats:['开头：你怎么发现水壶？','问题：朋友已经去哪里了？','行动：你怎样把水壶交还给朋友？','结尾：朋友有什么反应？'],check:['我写清楚开头、经过和结果。','我写出一个动作或一句对话。','我检查错别字、语序和标点。']}
+]};
+
+const fresh=()=>({version:1,year:'P3',topics:{P3:Object.fromEntries(subjects.map(s=>[s,seed[s].map(name=>({name,state:'new'}))]))},sessions:[],cursor:{},promptCursor:{},dailyDone:{}});
+let data;try{data=JSON.parse(localStorage.getItem(KEY))}catch{}
+if(!valid(data))data=fresh();
+data.dailyDone ||= {};
+function valid(x){return x&&x.version===1&&['P3','P4','P5','P6'].includes(x.year)&&x.topics&&Array.isArray(x.sessions)&&x.cursor&&x.promptCursor}
+const el=id=>document.getElementById(id);
+let mode='subject',activeQuestion=null,activeSubject='',activeIndex=0,answered=false,dailyReason='Daily mix';
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch{el('backupStatus').textContent='This browser could not save progress. Save a backup.'}}
+function escape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function yearTopics(){if(!data.topics[data.year])data.topics[data.year]={};for(const s of subjects)if(!Array.isArray(data.topics[data.year][s]))data.topics[data.year][s]=[];return data.topics[data.year]}
+function dateKey(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Singapore'})}
+function today(){return new Date().toLocaleDateString('en-SG',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Singapore'})}
+function completedToday(){return (data.dailyDone[dateKey()]||[]).length}
+function qHistory(id){return data.sessions.filter(x=>x.questionId===id&&(x.result==='correct'||x.result==='revisit'))}
+function mistakeState(id){const h=qHistory(id),miss=h.findIndex(x=>x.result==='revisit');if(miss<0)return{unresolved:false,correctAfter:0};const correctAfter=h.slice(0,miss).filter(x=>x.result==='correct').length;return{unresolved:correctAfter<2,correctAfter}}
+function stats(id){const h=qHistory(id);return{attempts:h.length,correct:h.filter(x=>x.result==='correct').length,last:h[0]?.result||'',mistake:mistakeState(id)}}
+function topicStatus(s,t){const qs=questions[s].filter(q=>q.topic===t);if(!qs.length)return'School evidence';const ids=new Set(qs.map(q=>q.id));const h=data.sessions.filter(x=>ids.has(x.questionId)&&(x.result==='correct'||x.result==='revisit'));if(!h.length)return'Learning';const unresolved=qs.some(q=>mistakeState(q.id).unresolved);const correct=h.filter(x=>x.result==='correct'),days=new Set(correct.map(x=>x.date?.slice(0,10)).filter(Boolean));return correct.length>=3&&days.size>=2&&!unresolved?'Secure':'Practising'}
+function dailySet(){
+ const key=dateKey(),d=Math.floor(Date.parse(key+'T00:00:00Z')/86400000);
+ const focus=key<='2026-10-06'?['English','Chinese']:key<='2026-10-21'?['Science','Mathematics','Chinese']:['Mathematics','Science','Chinese','English'];
+ const all=[];for(const s of subjects)questions[s].forEach((q,index)=>all.push({subject:s,index,id:q.id,q,st:stats(q.id)}));
+ const rank=x=>(x.st.mistake.unresolved?10000:0)+(focus.includes(x.subject)?300-focus.indexOf(x.subject)*40:0)+(x.st.attempts===0?80:Math.max(0,45-x.st.attempts*8))+(x.st.last==='revisit'?35:0)+((d+x.index*7+x.subject.length*11)%17);
+ const picked=[],used=new Set(),add=(x,reason)=>{if(x&&!used.has(x.id)&&picked.length<5){used.add(x.id);picked.push({...x,reason})}};
+ all.filter(x=>x.st.mistake.unresolved).sort((a,b)=>rank(b)-rank(a)).slice(0,2).forEach(x=>add(x,'Mistake memory'));
+ all.filter(x=>!used.has(x.id)).sort((a,b)=>rank(b)-rank(a)).forEach(x=>{if(picked.length<4)add(x,x.st.attempts===0?'New practice':'Needs practice')});
+ const confidence=all.filter(x=>!used.has(x.id)&&x.st.correct>0&&!x.st.mistake.unresolved).sort((a,b)=>b.st.correct-a.st.correct)[0];
+ add(confidence,'Confidence builder');
+ all.filter(x=>!used.has(x.id)).sort((a,b)=>rank(b)-rank(a)).forEach(x=>add(x,'Daily mix'));
+ return picked.slice(0,5);
+}
+function mission(){if(data.year!=='P3')return{label:'Your own map',title:'Add a topic from school',text:'The next school year begins with its real lessons.',button:'Open topic map',tab:'topics'};const now=dateKey();if(now<='2026-10-05')return{label:'Writing first',title:'Write one guided English scene',text:'Four story beats and three checks make a manageable step.',button:'Open writing studio',tab:'practice',subject:'English',type:'writing'};if(now<='2026-10-06')return{label:'Writing first',title:'写一个有开头和结尾的小故事',text:'跟着四个提示写，再检查三个要点。',button:'Open writing studio',tab:'practice',subject:'Chinese',type:'writing'};return{label:'Adaptive practice',title:'A smart set of five',text:'Today’s set pulls from mistakes, under-practised questions and a confidence-builder.',button:'Try today’s five',tab:'practice',daily:true}}
+function evidence(s,t){const xs=data.sessions.filter(x=>x.year===data.year&&x.subject===s&&(x.topic===t||x.topic==='Writing practice'&&/Writing|写作/.test(t)));return{count:xs.length,correct:xs.filter(x=>x.result==='correct').length,last:xs[0]?.result}}
+function renderHome(){const m=mission();el('missionLabel').textContent=m.label;el('missionTitle').textContent=m.title;el('missionText').textContent=m.text;el('missionButton').textContent=m.button;el('missionButton').onclick=()=>{if(m.subject)el('subjectSelect').value=m.subject;if(m.type)el('typeSelect').value=m.type;mode=m.daily?'daily':'subject';switchTab(m.tab)};el('dailyButton').classList.toggle('hidden',data.year!=='P3');el('dailyButton').textContent=`Today's five · ${Math.min(completedToday(),5)}/5`;el('dailyButton').onclick=()=>{mode='daily';switchTab('practice')};const now=dateKey();el('dates').innerHTML=data.year==='P3'?exams.map(([iso,d,label])=>`<div class="date ${iso<now?'past':''}"><div class="date-tag">${d}</div><div><strong>${escape(label)}</strong><small>${iso<now?'Completed date':'RGPS 2026 examination'}</small></div></div>`).join(''):'<div class="empty">Add school topics when the new year begins.</div>';const t=yearTopics();el('subjects').innerHTML=subjects.map(s=>{const has=t[s].filter(x=>evidence(s,x.name).count>0).length;const sts=t[s].filter(x=>topicStatus(s,x.name)==='Secure').length;return`<div class="subject"><strong>${s}</strong><small>${has} topics tried · ${sts} secure in Lamp practice</small></div>`}).join('')}
+function chineseHelp(q){return q.pinyin?`<details class="language-help"><summary>Show pinyin + English</summary><p><em>${escape(q.pinyin)}</em></p><p class="muted">${escape(q.translation)}</p></details>`:''}
+function renderWriting(s){const n=data.promptCursor[s]||0,p=guided[s][n%guided[s].length];el('challenge').innerHTML=`<div class="prompt-box"><p class="eyebrow">Guided writing · about 15 minutes</p><h3>${escape(p.title)}</h3><p>${escape(p.scene)}</p><ol>${p.beats.map(x=>`<li>${escape(x)}</li>`).join('')}</ol></div><h3>Before you finish</h3>${p.check.map((x,i)=>`<label class="check"><input type="checkbox" data-check="${i}"> ${escape(x)}</label>`).join('')}<div class="actions"><button class="btn" id="writingDone" disabled>Finish after checking all three</button><button class="btn secondary" id="anotherPrompt">Another scene</button></div><p id="writingFeedback"></p>`;el('challenge').querySelectorAll('[data-check]').forEach(x=>x.onchange=()=>el('writingDone').disabled=!([...el('challenge').querySelectorAll('[data-check]')].every(c=>c.checked)));el('writingDone').onclick=()=>{record(s,'Writing practice','finished',{questionId:`W${s[0]}${n%guided[s].length+1}`});el('writingDone').disabled=true;el('writingFeedback').textContent='Finished. Name one thing you improved while checking.'};el('anotherPrompt').onclick=()=>{data.promptCursor[s]=n+1;save();renderPractice()}}
+function renderQuestion(s,i,daily=false,reason='Daily mix'){const q=questions[s][i];activeQuestion=q;activeSubject=s;activeIndex=i;answered=false;dailyReason=reason;const done=daily?completedToday():0;el('challenge').innerHTML=`<div class="prompt-box"><p class="eyebrow">${daily?`Today’s five · ${Math.min(done+1,5)} of 5 · ${escape(reason)} · `:''}${escape(s)} · ${escape(q.topic)}</p><div class="exercise">${escape(q.q)}</div></div>${s==='Chinese'?chineseHelp(q):''}<div class="options">${q.options.map((v,j)=>`<button class="option" data-answer="${j}">${escape(v)}</button>`).join('')}</div><div id="answerFeedback"></div><div class="actions"><button class="btn secondary" id="nextQuestion" disabled>${daily?'Next in today’s five':'Next question'}</button></div>`;el('challenge').querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>answer(Number(b.dataset.answer)));el('nextQuestion').onclick=()=>{if(!daily){data.cursor[s]=(data.cursor[s]||0)+1;save()}renderPractice()}}
+function renderPractice(){el('dailyStart').classList.toggle('hidden',data.year!=='P3');el('selectRow').classList.toggle('hidden',mode==='daily');el('dailyStart').textContent=`Today's five · ${Math.min(completedToday(),5)}/5`;if(mode==='daily'&&data.year==='P3'){const next=dailySet().find(x=>!(data.dailyDone[dateKey()]||[]).includes(x.id));if(!next){el('challenge').innerHTML='<div class="feedback"><h3>Today’s five are complete</h3><p>You can stop here. Tomorrow the adaptive mix will rebalance again.</p><button class="btn secondary" id="freePractice">Choose a subject</button></div>';el('freePractice').onclick=()=>{mode='subject';renderPractice()};return}renderQuestion(next.subject,next.index,true,next.reason);return}const s=el('subjectSelect').value,type=el('typeSelect').value;if(type==='writing'){if(!guided[s]){el('challenge').innerHTML='<div class="empty">Guided writing is for English and Chinese. Choose Quick questions for this subject.</div>';return}renderWriting(s);return}if(data.year!=='P3'){el('challenge').innerHTML='<div class="empty">Primary 4–6 question banks have not been authored. Use the school topic map for now.</div>';return}renderQuestion(s,(data.cursor[s]||0)%questions[s].length)}
+function answer(i){if(answered)return;answered=true;const q=activeQuestion,s=activeSubject,correct=i===q.answer;el('challenge').querySelectorAll('[data-answer]').forEach(b=>{b.disabled=true;if(Number(b.dataset.answer)===i)b.classList.add('selected')});el('answerFeedback').innerHTML=`<div class="feedback ${correct?'':'review'}"><strong>${correct?'You got it!':'Good try. Let’s learn from it.'}</strong><p>${escape(q.why)}</p>${correct?'':`<p>The answer is <strong>${escape(q.options[q.answer])}</strong>.</p>`}</div>`;el('nextQuestion').disabled=false;if(mode==='daily'){const key=dateKey();data.dailyDone[key] ||= [];if(!data.dailyDone[key].includes(q.id))data.dailyDone[key].push(q.id)}record(s,q.topic,correct?'correct':'revisit',{questionId:q.id,dailyKey:mode==='daily'?dateKey():undefined,dailyReason:mode==='daily'?dailyReason:undefined})}
+function record(s,topic,result,extra={}){data.sessions.unshift({year:data.year,subject:s,topic,result,date:new Date().toISOString(),...extra});data.sessions=data.sessions.slice(0,160);save();renderHome();renderJourney()}
+function renderTopics(){const s=el('topicSubject').value,a=yearTopics()[s];el('topicList').innerHTML=a.length?a.map(t=>{const e=evidence(s,t.name),hasBank=data.year==='P3'&&questions[s].some(q=>q.topic===t.name),status=hasBank?topicStatus(s,t.name):'School evidence';return`<div class="topic"><div><span class="topic-title">${escape(t.name)}</span><div class="tiny">${e.count?`${e.count} attempt${e.count===1?'':'s'} · ${e.correct} correct`:'No recorded attempt'}${hasBank?' · Lamp practice status':' · use marked school work'}</div></div><span class="topic-badge">${status}</span></div>`}).join(''):'<div class="empty">No topics yet. Add one from school below.</div>'}
+function renderJourney(){const list=data.sessions.filter(x=>x.year===data.year),answers=list.filter(x=>x.result==='correct'||x.result==='revisit'),writing=list.filter(x=>x.result==='finished'),allQ=subjects.flatMap(s=>questions[s].map((q,index)=>({s,q,index}))),unresolved=allQ.filter(x=>mistakeState(x.q.id).unresolved),cleared=allQ.filter(x=>qHistory(x.q.id).some(y=>y.result==='revisit')&&!mistakeState(x.q.id).unresolved),recent=new Set(list.filter(x=>x.date&&Date.now()-Date.parse(x.date)<7*86400000).map(x=>x.date.slice(0,10)));el('journeySummary').textContent=`${answers.length} answers tried · ${writing.length} writing step${writing.length===1?'':'s'} finished.`;el('journeySubjects').innerHTML=`<div class="subject"><strong>${recent.size}</strong><small>practice days this week</small></div><div class="subject"><strong>${Math.min(completedToday(),5)} / 5</strong><small>today’s adaptive set</small></div><div class="subject"><strong>${unresolved.length}</strong><small>mistakes in memory</small></div><div class="subject"><strong>${cleared.length}</strong><small>mistakes cleared</small></div>`;el('sessions').innerHTML=list.length?list.slice(0,10).map(x=>`<div class="session"><div><strong>${escape(x.subject)}</strong><div class="tiny">${escape(x.topic)} · ${new Date(x.date).toLocaleDateString('en-SG',{day:'numeric',month:'short',timeZone:'Asia/Singapore'})}</div></div><span class="tiny">${x.result==='correct'?'Correct':x.result==='revisit'?'Revisit':'Finished'}</span></div>`).join(''):'<div class="empty">Your first practice step will appear here.</div>';el('mistakeMemory').innerHTML=unresolved.length?unresolved.map(x=>{const m=mistakeState(x.q.id);return`<div class="session"><div><strong>${escape(x.s)} · ${escape(x.q.topic)}</strong><div class="tiny">Correct revisits after the latest miss: ${m.correctAfter} of 2</div></div><span class="topic-badge">Learning</span></div>`}).join(''):'<div class="feedback"><strong>Memory clear for now.</strong><p>No unresolved missed questions.</p></div>'}
+function switchTab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('hidden',p.id!==name));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));const title={home:'One bright step at a time',practice:'Let’s practise',topics:'My topic map',journey:'My practice journey'},sub={home:'Choose a short task, then give yourself a break.',practice:'Try it, check it, learn from it.',topics:'Learning, Practising and Secure are Lamp practice signals.',journey:'See practice, recoveries and what needs another look.'};el('pageTitle').textContent=title[name];el('pageSub').textContent=sub[name];if(name==='practice')renderPractice();if(name==='topics')renderTopics();if(name==='journey')renderJourney();window.scrollTo({top:0,behavior:'smooth'})}
+subjects.forEach(s=>{el('subjectSelect').add(new Option(s,s));el('topicSubject').add(new Option(s,s))});el('dateLine').textContent=today();el('yearSelect').value=data.year;
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+el('yearSelect').onchange=()=>{data.year=el('yearSelect').value;yearTopics();save();renderHome();switchTab('home')};
+el('subjectSelect').onchange=()=>{mode='subject';renderPractice()};el('typeSelect').onchange=()=>{mode='subject';renderPractice()};el('topicSubject').onchange=renderTopics;el('dailyStart').onclick=()=>{mode='daily';renderPractice()};
+el('topicForm').onsubmit=e=>{e.preventDefault();const input=el('newTopic'),name=input.value.trim(),a=yearTopics()[el('topicSubject').value];if(name&&!a.some(x=>x.name.toLowerCase()===name.toLowerCase())){a.push({name,state:'new'});save();renderTopics();renderHome()}input.value=''};
+el('exportButton').onclick=()=>{const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='the-lamp-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);el('backupStatus').textContent='Backup saved to your downloads.'};
+el('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!valid(parsed)||JSON.stringify(parsed).length>500000)throw Error('Invalid');if(!confirm('Replace the progress on this device with this backup?'))return;data=parsed;data.sessions=data.sessions.slice(0,160);data.dailyDone ||= {};el('yearSelect').value=data.year;yearTopics();save();renderHome();renderJourney();switchTab('home');el('backupStatus').textContent='Backup opened.'}catch{el('backupStatus').textContent='That backup could not be opened.'}finally{e.target.value=''}};
+el('resetButton').onclick=()=>{if(!confirm('Start over? Save a backup first if you want to keep this progress.'))return;data=fresh();el('yearSelect').value='P3';save();renderHome();renderJourney();switchTab('home');el('backupStatus').textContent='A fresh start is ready.'};
+yearTopics();renderHome();renderJourney();
+})();
+</script>
+</body>
+</html>
